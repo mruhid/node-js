@@ -58,7 +58,7 @@ function pullchek(amount){
     }
     var son_str=bazaarr.join(" ");
     fs.writeFileSync('./numinallar.txt', son_str,'utf-8');
-    return bankarr;
+    return bankarr.reverse();
 }
 else{
     return "balansinizda kifayyet qeder cesait yoxdur";
@@ -67,6 +67,38 @@ else{
 }
 
 
+/*numinallari artirma*/
+
+function numinall_artirma(numinal,count){
+
+    const data2 =fs.readFileSync('numinallar.txt','utf-8');
+    var num=data2.split(" ");
+    
+        var arr=[];
+    for(let i=0;i<num.length;i++){
+    let say=num[i].split("-")[1];
+    let n=num[i].split("-")[0];
+    let sayint=parseInt(say);
+    
+    if(numinal==n){
+    var say2=sayint+count;
+    var fsr=numinal+"-"+say2;
+    arr.push(fsr);
+    }
+    
+    else{
+        let fsr2=n+"-"+say;
+        arr.push(fsr2);
+    }
+    
+    
+    }
+    const str2=arr.join(" ");
+    fs.writeFileSync('numinallar.txt',str2,'utf-8');
+    return "emeliyyat ugurla yerine yetirildi numinallarin sayi artirildi";
+    
+    }
+    
 /*numinallari gosteren*/
 
 function see_numinal(){
@@ -93,7 +125,7 @@ async function ishe_sal(){
             {
                 massage:'ne etmek isteyirsiniz',
                 type:'list',
-                choices:['Balansimi goster','Pul chek','numinallara bax'],
+                choices:['Balansimi goster','Pul chek','numinallara bax','numinallari artir'],
                 name:"secim"
 
             }
@@ -120,6 +152,71 @@ async function ishe_sal(){
                     const pul=see_numinal();
                     console.log(pul);
                     break;
+
+                    case 'numinallari artir':
+                        const cav=await prompts([{
+                            massage:'artirmaq istediyiniz numinal novunu secin',
+                            type:'list',
+                            choices:['100','50','20','10','5','1'],
+                            name:'secim2'
+                        }]);
+                        switch(cav.secim2){
+                            case '100':
+                                const sual1=await prompts([{
+                                    massage:'numinal sayini daxil edin',
+                                    type:'number',
+                                    name:'say'
+                                }])
+                                console.log(numinall_artirma(cav.secim2,sual1.say));
+
+                                break;
+                                case '50':
+                                const sual2=await prompts([{
+                                    massage:'numinal sayini daxil edin',
+                                    type:'number',
+                                    name:'say'
+                                }])
+                                console.log(numinall_artirma(cav.secim2,sual2.say));
+
+                                break;
+                                case '20':
+                                const sual3=await prompts([{
+                                    massage:'numinal sayini daxil edin',
+                                    type:'number',
+                                    name:'say'
+                                }])
+                                console.log(numinall_artirma(cav.secim2,sual3.say));
+
+                                break;
+                                case '10':
+                                const sual4=await prompts([{
+                                    massage:'numinal sayini daxil edin',
+                                    type:'number',
+                                    name:'say'
+                                }])
+                                console.log(numinall_artirma(cav.secim2,sual4.say));
+
+                                break;
+                                case '5':
+                                const sual5=await prompts([{
+                                    massage:'numinal sayini daxil edin',
+                                    type:'number',
+                                    name:'say'
+                                }])
+                                console.log(numinall_artirma(cav.secim2,sual5.say));
+
+                                break;
+                                case '1':
+                                const sual6=await prompts([{
+                                    massage:'numinal sayini daxil edin',
+                                    type:'number',
+                                    name:'say'
+                                }])
+                                console.log(numinall_artirma(cav.secim2,sual6.say));
+
+                                break;
+                        }
+                       break;
         }
         const ask = await prompts([
             {
